@@ -51,6 +51,6 @@ public abstract class Switch {
 
     abstract public void next();
 
-    abstract public void prev() ;
+    abstract public void prev();
 
 }
