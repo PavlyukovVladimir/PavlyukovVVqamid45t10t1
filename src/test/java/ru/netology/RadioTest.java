@@ -70,7 +70,7 @@ class RadioTest {
     @Test
     @DisplayName("Тест преобразование нового объекта Radio в строку")
     void testNewRadioObjectToString() {
-        String expected = "Radio{radioStationNumber=5, volume=50}";
+        String expected = "Radio{radioStationNumber=5, radioStationCount=10, volume=50}";
         String actual = radio.toString();
         assertEquals(expected, actual);
     }
@@ -100,10 +100,25 @@ class RadioTest {
     void testChangedRadioObjectToString() {
         radio.setRadioStationNumber(7);
         radio.volumeDown();
-        String expected = "Radio{radioStationNumber=7, volume=49}";
+        String expected = "Radio{radioStationNumber=7, radioStationCount=10, volume=49}";
         String actual = radio.toString();
         assertEquals(expected, actual);
     }
 
-
+    @ParameterizedTest(name = "{index} - {0}, стартовая позиция {1}, минимальная позиция {2}," +
+            "число позиций переключателя {3}, ожидаемый состав параметров переключателя {4}")
+    @CsvFileSource(files = "src/test/resources/dataSetRadioStationCount.csv")
+    @DisplayName("Параметризованный тест функционала, назначения количества радиостанций")
+    void testSetRadioStationCount(String desc, int prevCount, int nextCount, int positionsCount, String exp) {
+        Radio radio = new Radio(positionsCount);
+        for (int i = 1; i <= prevCount; i++) {
+            radio.prev();
+        }
+        for (int i = 1; i <= nextCount; i++) {
+            radio.next();
+        }
+        String expected = exp;
+        String actual = radio.toString();
+        assertEquals(expected, actual);
+    }
 }
