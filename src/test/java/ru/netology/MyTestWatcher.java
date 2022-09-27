@@ -9,7 +9,7 @@ import java.util.Optional;
 public class MyTestWatcher implements TestWatcher {
     @Override
     public void testDisabled(ExtensionContext context, Optional<String> reason) {
-        System.out.print("Тест " + context.getTestClass().get().getName() + "#" + context.getTestMethod().get().getName() + " был отменен!\uD83D\uDE4C\"");
+        System.out.println("Тест " + context.getTestClass().get().getName() + "#" + context.getTestMethod().get().getName() + " был отменен!\uD83D\uDE4C\"");
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ru.netology;
 
-public class Switch {
+public abstract class Switch {
     private final int minPosition;
     private final int positionsCount;
     private int position;
@@ -19,7 +19,7 @@ public class Switch {
             this.minPosition = startPosition;
         } else {
             // минимальная позиция не может быть ниже начальной позиции далее чем число позиций переключателя
-            this.minPosition = Math.max(startPosition - positionsCount + 1, minPosition);
+            this.minPosition = Math.max(this.position - this.positionsCount + 1, minPosition);
         }
     }
 
@@ -49,9 +49,8 @@ public class Switch {
         this.position = position;
     }
 
-    public void next() {
-    }
+    abstract public void next();
 
-    public void prev() {
-    }
+    abstract public void prev() ;
+
 }

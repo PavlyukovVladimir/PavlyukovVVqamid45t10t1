@@ -1,9 +1,6 @@
 package ru.netology;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -34,31 +31,77 @@ class RadioTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void prev() {
+    @ParameterizedTest(name = "{index} - {0}, нажатий {1}, ожидаем радиостанцию № {2}]")
+    @CsvFileSource(files = "src/test/resources/dataPrev.csv")
+    @DisplayName("Параметризованный тест кнопки prev")
+    void prev(String desc, int taps, int exp) {
+        for (int i = 1; i <= taps; i++) {
+            radio.prev();
+        }
+        int expected = exp;
+        int actual = radio.getRadioStationNumber();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest(name = "{index} - {0}, нажатий {1}, ожидаем радиостанцию № {2}]")
+    @CsvFileSource(files = "src/test/resources/dataVolumeUp.csv")
+    @DisplayName("Параметризованный тест кнопки volumeUp")
+    void volumeUp(String desc, int taps, int exp) {
+        for (int i = 1; i <= taps; i++) {
+            radio.volumeUp();
+        }
+        int expected = exp;
+        int actual = radio.getVolume();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest(name = "{index} - {0}, нажатий {1}, ожидаем радиостанцию № {2}]")
+    @CsvFileSource(files = "src/test/resources/dataVolumeDown.csv")
+    @DisplayName("Параметризованный тест кнопки volumeDown")
+    void volumeDown(String desc, int taps, int exp) {
+        for (int i = 1; i <= taps; i++) {
+            radio.volumeDown();
+        }
+        int expected = exp;
+        int actual = radio.getVolume();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void volumeUp() {
+    @DisplayName("Тест преобразование нового объекта Radio в строку")
+    void testNewRadioObjectToString() {
+        String expected = "Radio{radioStationNumber=5, volume=5}";
+        String actual = radio.toString();
+        assertEquals(expected, actual);
     }
 
-    @Test
-    void volumeDown() {
-    }
-
-    @Test
-    void testToString() {
-    }
-
+    @Disabled("getVolume has been tested in the tests prev and next methods")
     @Test
     void getVolume() {
     }
 
+    @Disabled("getRadioStationNumber has been tested in the tests volumeUp and volumeDown methods")
     @Test
     void getRadioStationNumber() {
     }
 
+    @ParameterizedTest(name = "{index} - {0}, устанавливаем {1} радиостанцию, ожидаем радиостанцию № {2}]")
+    @CsvFileSource(files = "src/test/resources/dataSetRadioStation.csv")
+    @DisplayName("Параметризованный тест установки номера радиостанции")
+    void setRadioStationNumber(String desc, int radioStationNumber, int exp) {
+        radio.setRadioStationNumber(radioStationNumber);
+        int expected = exp;
+        int actual = radio.getRadioStationNumber();
+        assertEquals(expected, actual);
+    }
+
     @Test
-    void setRadioStationNumber() {
+    @DisplayName("Тест преобразование измененного объекта Radio в строку")
+    void testChangedRadioObjectToString() {
+        radio.setRadioStationNumber(7);
+        radio.volumeDown();
+        String expected = "Radio{radioStationNumber=7, volume=4}";
+        String actual = radio.toString();
+        assertEquals(expected, actual);
     }
 }
