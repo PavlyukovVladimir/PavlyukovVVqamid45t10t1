@@ -1,57 +1,63 @@
 package ru.netology;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@ToString(includeFieldNames = true)
+@NoArgsConstructor
 public class Radio {
-    private final Switch radioStationSwitch;
-    private final Switch volumeSwitch;
+    @Getter
+    private int radioStationNumber = 5;
+    private int radioStationsCount = 10;
+    private final int minRadioStationNumber = 0;
 
-    public Radio() {
-        this.radioStationSwitch = new CyclicSwitch(5, 0, 10);
-        this.volumeSwitch = new LimitedSwitch(50, 0, 101);
-    }
+    private final int maxVolume = 100;
+    @Getter
+    private int volume = 50;
+    private final int minVolume = 0;
 
-    public Radio(int radioStationCount) {
-        this.radioStationSwitch = new CyclicSwitch(Math.abs(radioStationCount / 2), 0, radioStationCount);
-        this.volumeSwitch = new LimitedSwitch(50, 0, 101);
-    }
-
-    public void next() {
-        this.radioStationSwitch.next();
-    }
-
-    public void prev() {
-        this.radioStationSwitch.prev();
-    }
-
-    public void volumeUp() {
-        this.volumeSwitch.next();
-    }
-
-    public void volumeDown() {
-        this.volumeSwitch.prev();
-    }
-
-    @Override
-    public String toString() {
-        return "Radio{" +
-                "radioStationNumber=" + getRadioStationNumber() +
-                ", radioStationCount=" + getRadioStationCount() +
-                ", volume=" + getVolume() +
-                '}';
-    }
-
-    public int getRadioStationCount() {
-        return this.radioStationSwitch.getPositionsCount();
-    }
-
-    public int getVolume() {
-        return this.volumeSwitch.getPosition();
-    }
-
-    public int getRadioStationNumber() {
-        return this.radioStationSwitch.getPosition();
+    public Radio(int radioStationsCount) {
+        radioStationsCount = Math.abs(radioStationsCount);
+        if (radioStationsCount == 0) {
+            radioStationsCount = 1;
+        }
+        this.radioStationsCount = radioStationsCount;
+        this.radioStationNumber = radioStationsCount / 2;
     }
 
     public void setRadioStationNumber(int radioStationNumber) {
-        this.radioStationSwitch.setPosition(radioStationNumber);
+        if (this.minRadioStationNumber > radioStationNumber) return;
+        if ((this.minRadioStationNumber + this.radioStationsCount - 1) < radioStationNumber) return;
+        this.radioStationNumber = radioStationNumber;
+    }
+
+    public void next() {
+        if ((this.minRadioStationNumber + this.radioStationsCount - 1) > this.radioStationNumber) {
+            this.radioStationNumber++;
+        }else{
+            this.radioStationNumber = minRadioStationNumber;
+        }
+    }
+
+    public void prev() {
+        if (this.minRadioStationNumber < this.radioStationNumber) {
+            this.radioStationNumber--;
+        }else{
+            this.radioStationNumber = this.minRadioStationNumber + this.radioStationsCount - 1;
+        }
+    }
+
+    public void volumeUp() {
+        if (this.maxVolume > this.volume) {
+            this.volume++;
+        }
+    }
+
+    public void volumeDown() {
+        if (this.minVolume < this.volume) {
+            this.volume--;
+        }
     }
 }

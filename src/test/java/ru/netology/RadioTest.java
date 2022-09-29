@@ -70,7 +70,7 @@ class RadioTest {
     @Test
     @DisplayName("Тест преобразование нового объекта Radio в строку")
     void testNewRadioObjectToString() {
-        String expected = "Radio{radioStationNumber=5, radioStationCount=10, volume=50}";
+        String expected = "Radio(radioStationNumber=5, radioStationsCount=10, minRadioStationNumber=0, maxVolume=100, volume=50, minVolume=0)";
         String actual = radio.toString();
         assertEquals(expected, actual);
     }
@@ -100,7 +100,7 @@ class RadioTest {
     void testChangedRadioObjectToString() {
         radio.setRadioStationNumber(7);
         radio.volumeDown();
-        String expected = "Radio{radioStationNumber=7, radioStationCount=10, volume=49}";
+        String expected = "Radio(radioStationNumber=7, radioStationsCount=10, minRadioStationNumber=0, maxVolume=100, volume=49, minVolume=0)";
         String actual = radio.toString();
         assertEquals(expected, actual);
     }
