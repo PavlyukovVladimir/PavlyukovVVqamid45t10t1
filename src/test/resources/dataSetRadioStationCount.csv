@@ -1,4 +1,4 @@
-"Установка радиостанции, начальный объект", 0, 0, 30, "Radio{radioStationNumber=15, radioStationCount=30, volume=50}"
-"Установка радиостанции, работа переключателей", 5, 10, 40, "Radio{radioStationNumber=25, radioStationCount=40, volume=50}"
-"Установка радиостанции, нулевое количество", 1, 2, 0, "Radio{radioStationNumber=0, radioStationCount=1, volume=50}"
-"Установка радиостанции, отрицательное количество", 7, 10, -5, "Radio{radioStationNumber=0, radioStationCount=5, volume=50}"
+"Установка радиостанции, начальный объект", 0, 0, 30, "Radio(radioStationNumber=15, radioStationsCount=30, minRadioStationNumber=0, maxVolume=100, volume=50, minVolume=0)"
+"Установка радиостанции, работа переключателей", 5, 10, 40, "Radio(radioStationNumber=25, radioStationsCount=40, minRadioStationNumber=0, maxVolume=100, volume=50, minVolume=0)"
+"Установка радиостанции, нулевое количество", 1, 2, 0, "Radio(radioStationNumber=0, radioStationsCount=1, minRadioStationNumber=0, maxVolume=100, volume=50, minVolume=0)"
+"Установка радиостанции, отрицательное количество", 7, 10, -5, "Radio(radioStationNumber=0, radioStationsCount=5, minRadioStationNumber=0, maxVolume=100, volume=50, minVolume=0)"
