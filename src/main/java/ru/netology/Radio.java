@@ -54,9 +54,8 @@ public class Radio {
 
     public String toString() {
         int radioStationNumber = this.getRadioStationNumber();
-        int radioStationsCount = this.radioStationsCount;
         int volume = this.getVolume();
-        return "Radio(radioStationNumber=" + radioStationNumber + ", radioStationsCount=" + radioStationsCount + ", minRadioStationNumber=" + this.minRadioStationNumber + ", maxVolume=" + this.maxVolume + ", volume=" + volume + ", minVolume=" + this.minVolume + ")";
+        return "Radio(radioStationNumber=" + radioStationNumber + ", radioStationsCount=" + this.radioStationsCount + ", minRadioStationNumber=" + this.minRadioStationNumber + ", maxVolume=" + this.maxVolume + ", volume=" + volume + ", minVolume=" + this.minVolume + ")";
     }
 
     public int getRadioStationNumber() {
